@@ -1,0 +1,23 @@
+# playbook.yml
+---
+- hosts: all
+  sudo: yes
+  tasks:
+  
+    - name: 1. apt-get update the server
+      apt: update_cache=yes
+
+    - name: 2. install apache
+      apt: name=apache2 state=present
+    
+    - name: 3. install php module for apache
+      apt: name=libapache2-mod-php5 state=present
+
+    - name: 4. start apache
+      service: name=apache2 state=running enabled=yes
+
+    - name: 5. install git
+      apt: name=git state=present
+
+    - name: 6. install hello world php script
+      git: repo={{ project_repo}} dest={{ root_www }}
