@@ -1,15 +1,15 @@
-# playbook.yml
+# playbook - deb.yml
 ---
-- hosts: raspberrypi
+- hosts: [ubuntuservers, raspberrypi]
   sudo: yes
   tasks:
-  
+
     - name: 1. apt-get update the server
       apt: update_cache=yes
 
     - name: 2. install apache
       apt: name=apache2 state=present
-    
+
     - name: 3. install php module for apache
       apt: name=libapache2-mod-php5 state=present
 

@@ -1,0 +1,23 @@
+# playbook - rhel.yml
+---
+- hosts: centosservers
+  sudo: yes
+  tasks:
+
+    - name: 1. yum update the server
+      yum: name=* state=latest
+
+    - name: 2. install apache
+      yum: name=httpd state=present
+
+    - name: 3. install php
+      yum: name=php state=present
+
+    - name: 4. start apache
+      service: name=httpd state=running enabled=yes
+
+    - name: 5. install git
+      yum: name=git state=present
+
+    - name: 6. install hello world php script
+      git: repo={{ project_repo}} dest={{ root_www }}
